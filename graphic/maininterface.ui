@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>368</height>
+    <height>363</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,9 +30,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>30</y>
        <width>231</width>
-       <height>291</height>
+       <height>271</height>
       </rect>
      </property>
      <property name="font">
@@ -49,9 +49,9 @@
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>10</y>
+       <y>30</y>
        <width>231</width>
-       <height>291</height>
+       <height>271</height>
       </rect>
      </property>
      <property name="font">
@@ -65,6 +65,32 @@
      </property>
      <property name="readOnly">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Texto plano</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>10</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Texto cifrado</string>
      </property>
     </widget>
    </widget>
