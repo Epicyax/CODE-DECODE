@@ -18,7 +18,7 @@ class Encode:
             char = self.__plainText[i] # Tomamos el caracter i
 
             if ord(char) + dis > 126: # Comprueba limite de ASCII para evitar errores (~)
-                char = chr(ord(char) - 95) # El desplazamiento llegará por el límite inferior
+                    char = chr(ord(char) - 95) # El desplazamiento llegará por el límite inferior
 
             char = chr(ord(char) + dis) # Convierte el caracter a ascii, realiza el desplazamiento y lo regresa a caracter
             codedText = codedText + char
