@@ -111,9 +111,9 @@ class MainInterface(QMainWindow):
         try:
             file = open(located, 'w')
             if(self.ui.radioButton_encode.isChecked()): # Segun la opcion elegida guarda el texto plano o el cifrado
-                text = self.ui.plainTextEdit_normal.toPlainText()
-            else:
                 text = self.ui.plainTextEdit_coded.toPlainText()
+            else:
+                text = self.ui.plainTextEdit_normal.toPlainText()
             file.write(text)
             print(text)
         except:
