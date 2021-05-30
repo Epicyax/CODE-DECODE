@@ -45,18 +45,20 @@ class MainInterface(QMainWindow):
             display = KeyGeneratedDialog(array[1]) # Se manda la key en otra ventana
             display.exec_()
         except:
-            QMessageBox.critical( # Aviso de error
+            self.encode() # Si falla se vuelve a realizar el cifrado hasta que sea exitoso
+            '''QMessageBox.critical( # Aviso de error
                 self,
                 "Error",
                 "No se ha podido cifrar el texto"
-            )
+            )''' 
+            # Debido a que a veces la key generada causa error preferí volver a llamar en vez de mandar mensaje de error
         
         
     @Slot()
     def decode(self):
         display = KeyNeededDialog()
         display.exec_() # Abre el dialogo para pedir la key
-        key = int(display.getKey()) # Almacena la key obtenida del dialogo
+        key = display.getKey() # Almacena la key obtenida del dialogo
         try: 
             codedText = self.ui.plainTextEdit_coded.toPlainText()
             data = Decode(codedText, key)
@@ -115,7 +117,6 @@ class MainInterface(QMainWindow):
             else:
                 text = self.ui.plainTextEdit_normal.toPlainText()
             file.write(text)
-            print(text)
         except:
             QMessageBox.critical(
                 self,
