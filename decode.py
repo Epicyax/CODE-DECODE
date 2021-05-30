@@ -14,15 +14,14 @@ class Decode:
         decodedText = ""
 
         for i in range(len(self.__codedText)):
-            char = self.__codedText[i]
+            char = self.__codedText[i] # Toma el caracter i
 
-            if ord(char) - self.__key < 32: # Limite de ASCII para evitar errores ( )
-                char = chr(ord(char) + 95)
+            if ord(char) - self.__key < 32: # Comprueba limite de ASCII para evitar errores ( )
+                char = chr(ord(char) + 95) # El desplazamiento llegará por el límite superior
 
-            char = chr(ord(char) - self.__key)
+            char = chr(ord(char) - self.__key) # Convierte el caracter a ascii, realiza el desplazamiento hacia atrás y lo regresa a caracter
             decodedText = decodedText + char
 
-        print(decodedText)
         self.__decodedText = decodedText
 
 

@@ -29,23 +29,23 @@ class MainInterface(QMainWindow):
     @Slot()
     def encode(self):
         try:
-            text = self.ui.plainTextEdit_normal.toPlainText()
-            array = []
+            text = self.ui.plainTextEdit_normal.toPlainText() # Obtenemos el texto del text edit
+            array = [] # Genera el arreglo que tendrá el texto cifrado y la key
 
             data = Encode(text)
             array = data.encodeText()
 
             self.ui.plainTextEdit_coded.setPlainText(array[0])
             
-            QMessageBox.information(
+            QMessageBox.information( # Aviso de exito
                 self,
                 "Éxito",
                 "Texto cifrado con éxito"
             )
-            display = KeyGeneratedDialog(array[1]) # Se manda la key
+            display = KeyGeneratedDialog(array[1]) # Se manda la key en otra ventana
             display.exec_()
         except:
-            QMessageBox.critical(
+            QMessageBox.critical( # Aviso de error
                 self,
                 "Error",
                 "No se ha podido cifrar el texto"
@@ -55,8 +55,8 @@ class MainInterface(QMainWindow):
     @Slot()
     def decode(self):
         display = KeyNeededDialog()
-        display.exec_()
-        key = int(display.getKey())
+        display.exec_() # Abre el dialogo para pedir la key
+        key = int(display.getKey()) # Almacena la key obtenida del dialogo
         try: 
             codedText = self.ui.plainTextEdit_coded.toPlainText()
             data = Decode(codedText, key)
@@ -64,13 +64,13 @@ class MainInterface(QMainWindow):
             decodedText = data.decode()
 
             self.ui.plainTextEdit_normal.setPlainText(decodedText)
-            QMessageBox.information(
+            QMessageBox.information( # Aviso de exito
                 self,
                 "Éxito",
                 "Texto descifrado con éxito"
             )
         except:
-            QMessageBox.critical(
+            QMessageBox.critical( # Aviso de error
                 self,
                 "Error",
                 "No se ha podido descifrar el texto"
@@ -88,7 +88,7 @@ class MainInterface(QMainWindow):
         try:
             file = open(located, 'r')
             text = file.read()
-            if(self.ui.radioButton_encode.isChecked()):
+            if(self.ui.radioButton_encode.isChecked()): # Segun la opcion elegida, el archivo abierto se pone como texto plano o cifrado
                 self.ui.plainTextEdit_normal.setPlainText(text)
             else:
                 self.ui.plainTextEdit_coded.setPlainText(text)
@@ -110,7 +110,7 @@ class MainInterface(QMainWindow):
         )[0]
         try:
             file = open(located, 'w')
-            if(self.ui.radioButton_encode.isChecked()):
+            if(self.ui.radioButton_encode.isChecked()): # Segun la opcion elegida guarda el texto plano o el cifrado
                 text = self.ui.plainTextEdit_normal.toPlainText()
             else:
                 text = self.ui.plainTextEdit_coded.toPlainText()
