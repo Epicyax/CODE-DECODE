@@ -2,14 +2,16 @@ from sys import displayhook
 from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox
 from PySide2.QtCore import Slot
 from graphic.ui_maininterface import Ui_MainWindow
-from process import Process
 from keyneededdialog import KeyNeededDialog
 from keygenerateddialog import KeyGeneratedDialog
+from encode import Encode
+from decode import Decode
 
 class MainInterface(QMainWindow):
     def __init__(self):
         super(MainInterface, self).__init__()
-        self.process = Process()
+        self.encodeText = Encode()
+        self.decodeText = Decode()
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -28,15 +30,19 @@ class MainInterface(QMainWindow):
     def encode(self):
         try:
             text = self.ui.plainTextEdit_normal.toPlainText()
-            data = self.process.encode(text)
-            self.ui.plainTextEdit_coded.setPlainText(data[0])
+            array = []
+
+            data = Encode(text)
+            array = data.encodeText()
+
+            self.ui.plainTextEdit_coded.setPlainText(array[0])
             
             QMessageBox.information(
                 self,
                 "Éxito",
                 "Texto cifrado con éxito"
             )
-            display = KeyGeneratedDialog(data[1]) # Se manda la key
+            display = KeyGeneratedDialog(array[1]) # Se manda la key
             display.exec_()
         except:
             QMessageBox.critical(
@@ -50,9 +56,13 @@ class MainInterface(QMainWindow):
     def decode(self):
         display = KeyNeededDialog()
         display.exec_()
-        key = display.getKey()
+        key = int(display.getKey())
         try: 
-            decodedText = self.process.decode(key)
+            codedText = self.ui.plainTextEdit_coded.toPlainText()
+            data = Decode(codedText, key)
+
+            decodedText = data.decode()
+
             self.ui.plainTextEdit_normal.setPlainText(decodedText)
             QMessageBox.information(
                 self,
